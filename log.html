@@ -4,238 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trigger Log | Emergency Protocol</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #0a0a0a;
-            --text: #f0f0f0;
-            --accent: #ff3333;
-            --warning: #ffaa00;
-            --safe: #00ff88;
-            --border: #333;
-            --hover: #1a1a1a;
+            --deep-brown: #1a1310; --dark-brown: #2d1f1a; --medium-brown: #5c4a3d;
+            --cream: #f4ead5; --gold: #c9a961; --burgundy: #6b2c2c; --burnt-orange: #b85c38;
         }
-
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Courier Prime', monospace;
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 1rem;
+            background: linear-gradient(135deg, var(--deep-brown) 0%, var(--dark-brown) 100%);
+            color: var(--cream); font-family: 'Crimson Text', serif; line-height: 1.8;
+            min-height: 100vh; padding: 2rem 1rem;
         }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
+        .container { max-width: 800px; margin: 0 auto; }
         h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-            text-transform: uppercase;
+            font-family: 'Cinzel', serif; font-size: clamp(2rem, 6vw, 3.5rem);
+            letter-spacing: 0.1em; margin-bottom: 0.5rem; color: var(--gold); text-transform: uppercase;
         }
-
         .back-btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            margin-bottom: 1rem;
-            transition: all 0.2s ease;
+            display: inline-block; padding: 0.8rem 1.5rem; border: 1px solid var(--medium-brown);
+            margin-bottom: 1.5rem; background: rgba(45, 31, 26, 0.6); transition: all 0.3s ease;
         }
-
-        .back-btn:hover {
-            border-color: var(--accent);
-            background: var(--hover);
-        }
-
+        .back-btn:hover { border-color: var(--gold); }
         .intro {
-            background: var(--hover);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--warning);
+            background: rgba(93, 74, 61, 0.3); padding: 1.5rem; margin-bottom: 2rem;
+            border-left: 3px solid var(--burnt-orange);
         }
-
         .log-form {
-            background: var(--hover);
-            padding: 2rem;
-            border: 2px solid var(--border);
-            margin-bottom: 2rem;
+            background: rgba(45, 31, 26, 0.8); padding: 2rem;
+            border: 1px solid var(--medium-brown); margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
+        .form-group { margin-bottom: 1.5rem; }
         label {
-            display: block;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--warning);
+            display: block; font-family: 'Cinzel', serif; font-size: 1.1rem;
+            margin-bottom: 0.5rem; color: var(--gold); letter-spacing: 0.03em;
         }
-
-        input[type="text"],
-        input[type="date"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 0.8rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            color: var(--text);
-            font-family: 'Courier Prime', monospace;
-            font-size: 0.9rem;
+        input[type="text"], input[type="date"], textarea, select {
+            width: 100%; padding: 0.8rem; background: rgba(29, 19, 16, 0.8);
+            border: 1px solid var(--medium-brown); color: var(--cream);
+            font-family: 'Crimson Text', serif; font-size: 0.95rem;
         }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
+        textarea { min-height: 100px; resize: vertical; }
         .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 0.5rem;
-            margin-top: 0.5rem;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;
         }
-
         .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'Courier Prime', monospace;
-            font-size: 0.9rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            font-family: 'Crimson Text', serif; font-size: 0.95rem;
         }
-
-        input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+        input[type="checkbox"] { width: 18px; height: 18px; }
+        .submit-btn, .export-btn, .clear-btn {
+            background: var(--cream); color: var(--burgundy); border: 2px solid var(--cream);
+            padding: 1rem 2rem; font-family: 'Cinzel', serif; font-size: 1.2rem;
+            cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.05em;
         }
-
-        .submit-btn {
-            background: var(--accent);
-            color: var(--bg);
-            border: 2px solid var(--accent);
-            padding: 1rem 2rem;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.3rem;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.2s ease;
-        }
-
-        .submit-btn:hover {
-            background: var(--bg);
-            color: var(--accent);
-        }
-
-        .entries-section {
-            margin-top: 3rem;
-        }
-
+        .submit-btn { width: 100%; }
+        .submit-btn:hover, .export-btn:hover { background: var(--gold); border-color: var(--gold); }
         .section-header {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--warning);
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 1rem;
+            color: var(--gold); border-bottom: 2px solid var(--medium-brown); padding-bottom: 0.5rem;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
         }
-
-        .clear-btn {
-            background: var(--border);
-            color: var(--text);
-            border: none;
-            padding: 0.5rem 1rem;
-            font-family: 'Courier Prime', monospace;
+        .header-buttons { display: flex; gap: 0.5rem; }
+        .export-btn, .clear-btn {
+            background: rgba(45, 31, 26, 0.8); color: var(--cream);
+            border: 1px solid var(--medium-brown); padding: 0.5rem 1rem;
             font-size: 0.9rem;
-            cursor: pointer;
         }
-
-        .clear-btn:hover {
-            background: var(--accent);
-        }
-
+        .clear-btn:hover { background: var(--burgundy); border-color: var(--burgundy); }
         .entry {
-            background: var(--hover);
-            border: 2px solid var(--border);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+            background: rgba(45, 31, 26, 0.8); border: 1px solid var(--medium-brown);
+            padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-
         .entry-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--medium-brown);
         }
-
         .entry-date {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.3rem;
-            color: var(--safe);
+            font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.05em;
         }
-
         .delete-entry {
-            background: none;
-            border: none;
-            color: var(--accent);
-            cursor: pointer;
-            font-size: 1.2rem;
+            background: none; border: none; color: var(--burgundy);
+            cursor: pointer; font-size: 1.2rem;
         }
-
-        .entry-field {
-            margin-bottom: 0.8rem;
-        }
-
-        .entry-label {
-            font-weight: bold;
-            color: var(--warning);
-        }
-
-        .no-entries {
-            text-align: center;
-            padding: 2rem;
-            opacity: 0.5;
-        }
-
-        a {
-            color: var(--text);
-            text-decoration: none;
-        }
-
-        .helper-text {
-            font-size: 0.85rem;
-            opacity: 0.7;
-            margin-top: 0.3rem;
-        }
+        .entry-field { margin-bottom: 0.8rem; }
+        .entry-label { font-weight: bold; color: var(--gold); }
+        .no-entries { text-align: center; padding: 2rem; opacity: 0.5; }
+        .helper-text { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; font-style: italic; }
+        a { color: var(--cream); text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="index.html" class="back-btn">← Back to Dashboard</a>
-        
         <h1>📝 Trigger Log</h1>
-        
         <div class="intro">
-            <strong>Track what happened and when.</strong> Patterns emerge over time - like the bangs comment → 3 week spiral. This helps you and Anahi identify what's actually triggering you, even when it's not obvious in the moment.
+            <strong>Track what happened and when.</strong> Patterns emerge over time—like the bangs comment → 3 week spiral. This helps you and Anahi identify what's actually triggering you, even when it's not obvious in the moment.
         </div>
 
         <div class="log-form">
@@ -244,7 +108,6 @@
                     <label for="date">Date</label>
                     <input type="date" id="date" required>
                 </div>
-
                 <div class="form-group">
                     <label for="state">What State Were You In?</label>
                     <select id="state">
@@ -260,43 +123,22 @@
                         <option value="other">Other/Mixed</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label>Physical Symptoms (check all that apply)</label>
                     <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="symptoms" value="chest-tight"> Chest tightness
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="symptoms" value="jaw-clenched"> Jaw clenched (TMJ)
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="symptoms" value="shoulders-tense"> Shoulders tense
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="symptoms" value="stomach-issues"> Stomach issues/IBS
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="symptoms" value="vibrating"> 4am vibration
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="symptoms" value="cant-eat"> Can't eat/food aversion
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="symptoms" value="exhausted"> Exhausted/10-12hr sleep
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="symptoms" value="restless"> Restless/need to move
-                        </label>
+                        <label class="checkbox-label"><input type="checkbox" name="symptoms" value="chest-tight"> Chest tightness</label>
+                        <label class="checkbox-label"><input type="checkbox" name="symptoms" value="jaw-clenched"> Jaw clenched (TMJ)</label>
+                        <label class="checkbox-label"><input type="checkbox" name="symptoms" value="shoulders-tense"> Shoulders tense</label>
+                        <label class="checkbox-label"><input type="checkbox" name="symptoms" value="stomach-issues"> Stomach issues/IBS</label>
+                        <label class="checkbox-label"><input type="checkbox" name="symptoms" value="vibrating"> 4am vibration</label>
+                        <label class="checkbox-label"><input type="checkbox" name="symptoms" value="cant-eat"> Can't eat/food aversion</label>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="what-happened">What Happened? (Who did you talk to? What felt off?)</label>
                     <textarea id="what-happened" placeholder="Be specific: phone call with dad, saw parents, comment about appearance, work stress, etc."></textarea>
                     <div class="helper-text">Include: who you interacted with, what was said, what you noticed</div>
                 </div>
-
                 <div class="form-group">
                     <label for="when-noticed">When Did You Notice the Response?</label>
                     <select id="when-noticed">
@@ -309,17 +151,14 @@
                     </select>
                     <div class="helper-text">This helps identify delayed reactions (like the bangs comment)</div>
                 </div>
-
                 <div class="form-group">
                     <label for="what-helped">What Helped? (If anything)</label>
                     <textarea id="what-helped" placeholder="Maya walk, drawing, hot bath, therapy session, etc."></textarea>
                 </div>
-
                 <div class="form-group">
                     <label for="notes">Additional Notes</label>
                     <textarea id="notes" placeholder="Anything else to remember about this..."></textarea>
                 </div>
-
                 <button type="submit" class="submit-btn">Save Entry</button>
             </form>
         </div>
@@ -327,7 +166,10 @@
         <div class="entries-section">
             <div class="section-header">
                 <span>Previous Entries</span>
-                <button class="clear-btn" onclick="clearAllEntries()">Clear All</button>
+                <div class="header-buttons">
+                    <button class="export-btn" onclick="exportToCSV()">Export CSV</button>
+                    <button class="clear-btn" onclick="clearAllEntries()">Clear All</button>
+                </div>
             </div>
             <div id="entries-container">
                 <div class="no-entries">No entries yet. Add your first one above.</div>
@@ -336,15 +178,11 @@
     </div>
 
     <script>
-        // Set today's date as default
         document.getElementById('date').valueAsDate = new Date();
-
-        // Load entries on page load
         loadEntries();
 
         document.getElementById('trigger-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const entry = {
                 date: document.getElementById('date').value,
                 state: document.getElementById('state').value,
@@ -355,36 +193,28 @@
                 notes: document.getElementById('notes').value,
                 timestamp: new Date().toISOString()
             };
-            
             saveEntry(entry);
-            
-            // Reset form
             this.reset();
             document.getElementById('date').valueAsDate = new Date();
-            
-            // Reload entries
             loadEntries();
         });
 
         function saveEntry(entry) {
             let entries = JSON.parse(localStorage.getItem('triggerLog') || '[]');
-            entries.unshift(entry); // Add to beginning
+            entries.unshift(entry);
             localStorage.setItem('triggerLog', JSON.stringify(entries));
         }
 
         function loadEntries() {
             const entries = JSON.parse(localStorage.getItem('triggerLog') || '[]');
             const container = document.getElementById('entries-container');
-            
             if (entries.length === 0) {
                 container.innerHTML = '<div class="no-entries">No entries yet. Add your first one above.</div>';
                 return;
             }
-            
             container.innerHTML = entries.map((entry, index) => {
                 const date = new Date(entry.date);
                 const formattedDate = date.toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
-                
                 return `
                     <div class="entry">
                         <div class="entry-header">
@@ -418,41 +248,56 @@
             }
         }
 
+        function exportToCSV() {
+            const entries = JSON.parse(localStorage.getItem('triggerLog') || '[]');
+            if (entries.length === 0) {
+                alert('No entries to export');
+                return;
+            }
+            const csv = ['Date,State,Symptoms,What Happened,When Noticed,What Helped,Notes'];
+            entries.forEach(entry => {
+                const row = [
+                    entry.date,
+                    formatState(entry.state),
+                    `"${formatSymptoms(entry.symptoms).replace(/"/g, '""')}"`,
+                    `"${(entry.whatHappened || '').replace(/"/g, '""')}"`,
+                    formatWhenNoticed(entry.whenNoticed),
+                    `"${(entry.whatHelped || '').replace(/"/g, '""')}"`,
+                    `"${(entry.notes || '').replace(/"/g, '""')}"`
+                ];
+                csv.push(row.join(','));
+            });
+            const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `trigger-log-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
         function formatState(state) {
             const states = {
-                'flatline': 'Flatline/Depression',
-                'dissociated': 'Dissociated',
-                'frozen': 'Frozen/Stuck',
-                'activated': 'Activated/Anxious',
-                'angry': 'Angry',
-                'si': 'SI thoughts',
-                'crying': 'Crying/Overwhelmed',
-                'numb': 'Numb everywhere',
-                'other': 'Other/Mixed'
+                'flatline': 'Flatline/Depression', 'dissociated': 'Dissociated', 'frozen': 'Frozen/Stuck',
+                'activated': 'Activated/Anxious', 'angry': 'Angry', 'si': 'SI thoughts',
+                'crying': 'Crying/Overwhelmed', 'numb': 'Numb everywhere', 'other': 'Other/Mixed'
             };
             return states[state] || state;
         }
 
         function formatSymptoms(symptoms) {
             const symptomsMap = {
-                'chest-tight': 'Chest tightness',
-                'jaw-clenched': 'Jaw clenched',
-                'shoulders-tense': 'Shoulders tense',
-                'stomach-issues': 'Stomach/IBS',
-                'vibrating': '4am vibration',
-                'cant-eat': 'Can\'t eat',
-                'exhausted': 'Exhausted',
-                'restless': 'Restless'
+                'chest-tight': 'Chest tightness', 'jaw-clenched': 'Jaw clenched',
+                'shoulders-tense': 'Shoulders tense', 'stomach-issues': 'Stomach/IBS',
+                'vibrating': '4am vibration', 'cant-eat': "Can't eat"
             };
             return symptoms.map(s => symptomsMap[s] || s).join(', ');
         }
 
         function formatWhenNoticed(when) {
             const timings = {
-                'immediate': 'Immediately/Same day',
-                'next-day': 'Next day',
-                'week-later': 'About a week later',
-                'weeks-later': '2-3 weeks later',
+                'immediate': 'Immediately/Same day', 'next-day': 'Next day',
+                'week-later': 'About a week later', 'weeks-later': '2-3 weeks later',
                 'unclear': 'Not sure when it started'
             };
             return timings[when] || when;

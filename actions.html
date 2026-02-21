@@ -4,226 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Action Menu | Emergency Protocol</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #0a0a0a;
-            --text: #f0f0f0;
-            --accent: #ff3333;
-            --warning: #ffaa00;
-            --safe: #00ff88;
-            --border: #333;
-            --hover: #1a1a1a;
+            --deep-brown: #1a1310; --dark-brown: #2d1f1a; --medium-brown: #5c4a3d;
+            --cream: #f4ead5; --gold: #c9a961; --burgundy: #6b2c2c; --burnt-orange: #b85c38;
         }
-
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Courier Prime', monospace;
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 1rem;
+            background: linear-gradient(135deg, var(--deep-brown) 0%, var(--dark-brown) 100%);
+            color: var(--cream); font-family: 'Crimson Text', serif; line-height: 1.8;
+            min-height: 100vh; padding: 2rem 1rem;
         }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
+        .container { max-width: 900px; margin: 0 auto; }
         h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-            text-transform: uppercase;
+            font-family: 'Cinzel', serif; font-size: clamp(2rem, 6vw, 3.5rem);
+            letter-spacing: 0.1em; margin-bottom: 0.5rem; color: var(--gold); text-transform: uppercase;
         }
-
         .back-btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            margin-bottom: 1rem;
-            transition: all 0.2s ease;
+            display: inline-block; padding: 0.8rem 1.5rem; border: 1px solid var(--medium-brown);
+            margin-bottom: 1.5rem; background: rgba(45, 31, 26, 0.6); transition: all 0.3s ease;
         }
-
-        .back-btn:hover {
-            border-color: var(--accent);
-            background: var(--hover);
-        }
-
+        .back-btn:hover { border-color: var(--gold); }
         .intro {
-            background: var(--hover);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--warning);
+            background: rgba(93, 74, 61, 0.3); padding: 1.5rem; margin-bottom: 2rem;
+            border-left: 3px solid var(--burnt-orange);
         }
-
-        .level {
-            margin-bottom: 3rem;
-        }
-
+        .level { margin-bottom: 3rem; }
         .level-header {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-left: 6px solid;
+            font-family: 'Cinzel', serif; font-size: 2.2rem; padding: 1.5rem;
+            margin-bottom: 1rem; border-left: 4px solid;
         }
-
-        .level-red .level-header {
-            background: var(--accent);
-            color: var(--bg);
-            border-color: var(--accent);
-        }
-
-        .level-orange .level-header {
-            background: rgba(255, 170, 0, 0.2);
-            color: var(--warning);
-            border-color: var(--warning);
-        }
-
-        .level-yellow .level-header {
-            background: rgba(255, 255, 0, 0.1);
-            color: #ffff00;
-            border-color: #ffff00;
-        }
-
-        .level-green .level-header {
-            background: rgba(0, 255, 136, 0.1);
-            color: var(--safe);
-            border-color: var(--safe);
-        }
-
+        .level-red .level-header { background: linear-gradient(135deg, var(--burgundy), #4a1f1f); border-color: var(--burgundy); }
+        .level-orange .level-header { background: rgba(184, 92, 56, 0.3); color: var(--burnt-orange); border-color: var(--burnt-orange); }
+        .level-yellow .level-header { background: rgba(139, 111, 71, 0.2); color: var(--gold); border-color: var(--gold); }
+        .level-green .level-header { background: rgba(93, 74, 61, 0.2); color: var(--cream); border-color: var(--medium-brown); }
         .action-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;
         }
-
         .action-card {
-            background: var(--hover);
-            border: 2px solid var(--border);
-            padding: 1.5rem;
-            transition: all 0.2s ease;
+            background: rgba(45, 31, 26, 0.8); border: 1px solid var(--medium-brown);
+            padding: 1.5rem; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-
-        .action-card:hover {
-            border-color: var(--accent);
-            transform: translateX(4px);
-        }
-
+        .action-card:hover { border-color: var(--gold); transform: translateY(-4px); }
         .action-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-family: 'Cinzel', serif; font-size: 1.4rem; margin-bottom: 0.5rem;
+            color: var(--gold); letter-spacing: 0.05em;
         }
-
-        .action-desc {
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-        }
-
+        .action-desc { font-size: 0.95rem; margin-bottom: 0.8rem; }
         .action-why {
-            font-size: 0.85rem;
-            font-style: italic;
-            opacity: 0.7;
-            border-top: 1px solid var(--border);
-            padding-top: 0.5rem;
-            margin-top: 0.5rem;
+            font-size: 0.85rem; font-style: italic; opacity: 0.7;
+            border-top: 1px solid var(--medium-brown); padding-top: 0.5rem; margin-top: 0.5rem;
         }
-
-        a {
-            color: var(--text);
-            text-decoration: none;
+        .emergency-btn, .link-button {
+            background: var(--cream); color: var(--burgundy); border: 2px solid var(--cream);
+            padding: 0.8rem 1.5rem; font-family: 'Cinzel', serif; cursor: pointer;
+            transition: all 0.3s ease; margin-top: 0.5rem; display: inline-block;
         }
-
-        .link-button {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--accent);
-            margin-top: 0.5rem;
-            transition: all 0.2s ease;
-            font-size: 0.85rem;
+        .emergency-btn:hover, .link-button:hover {
+            background: var(--gold); border-color: var(--gold);
         }
-
-        .link-button:hover {
-            background: var(--accent);
-            color: var(--bg);
-        }
-
         .important-note {
-            background: rgba(255, 51, 51, 0.2);
-            border: 2px solid var(--accent);
-            padding: 1rem;
-            margin-bottom: 1rem;
+            background: rgba(107, 44, 44, 0.2); border: 2px solid var(--burgundy);
+            padding: 1rem; margin-bottom: 1rem;
         }
+        a { color: var(--cream); text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="index.html" class="back-btn">← Back to Dashboard</a>
-        
         <h1>⚡ Action Menu</h1>
-        
         <div class="intro">
-            <strong>Pick actions based on your current state.</strong> When you're in crisis, decision-making is fucked, so these are organized by severity. Start at the top if you're in bad shape.
+            <strong>Pick actions based on your current state.</strong> When you're in crisis, decision-making is difficult, so these are organized by severity. Start at the top if you're in bad shape.
         </div>
 
-        <!-- RED ALERT -->
         <div class="level level-red" id="red">
             <div class="level-header">
                 🔴 RED ALERT
                 <div style="font-size: 1rem; margin-top: 0.5rem;">SI thoughts | Can't think | Immediate danger to self</div>
             </div>
-
             <div class="important-note">
                 <strong>If you are actively planning to harm yourself, call 999 or go to A&E.</strong> This toolkit is for coping, not for replacing emergency services when you're in immediate danger.
             </div>
-
             <div class="action-grid">
                 <div class="action-card">
                     <div class="action-title">📧 Email Anahi</div>
                     <div class="action-desc">Send an immediate message. You don't need to explain everything - just "I need support right now."</div>
-                    <a href="#" onclick="emailAnahi()" class="link-button">Open Email Template</a>
+                    <button class="link-button" onclick="emailAnahi()">Open Email Template</button>
                     <div class="action-why">Why: She's your therapist. She needs to know. You don't have to manage this alone.</div>
                 </div>
-
                 <div class="action-card">
                     <div class="action-title">🛁 Hot Bath NOW</div>
                     <div class="action-desc">Run the water as hot as you can stand. Get in. Just exist there for 20 minutes minimum.</div>
                     <div class="action-why">Why: Temperature shock helps ground you in your body. Water is containing.</div>
                 </div>
-
                 <div class="action-card">
                     <div class="action-title">🐕 Maya to Crate WITH You</div>
                     <div class="action-desc">Take Maya, get your weighted blanket, curl up on the floor by her crate or on your bed. Just be.</div>
                     <div class="action-why">Why: Physical presence of another living being. Warmth. Weight. Grounding.</div>
                 </div>
-
                 <div class="action-card">
                     <div class="action-title">🧊 Ice Protocol</div>
                     <div class="action-desc">Hold ice in your hands. Press it to your face, neck, wrists. Sharp sensation to break the spiral.</div>
                     <div class="action-why">Why: Intense physical sensation interrupts dissociation and SI thoughts.</div>
                 </div>
-
                 <div class="action-card">
                     <div class="action-title">⏱️ 15-Minute Rule</div>
                     <div class="action-desc">Tell yourself you'll wait 15 minutes. Set a timer. When it goes off, decide again. Repeat.</div>
                     <div class="action-why">Why: Breaking time into tiny chunks makes it survivable. You only need to survive the next 15 minutes.</div>
                 </div>
-
                 <div class="action-card">
                     <div class="action-title">🫁 Box Breathing (Emergency)</div>
                     <div class="action-desc">In for 4, hold for 4, out for 4, hold for 4. Repeat until you can think a bit clearer.</div>
@@ -233,176 +123,97 @@
             </div>
         </div>
 
-        <!-- ORANGE ALERT -->
         <div class="level level-orange">
             <div class="level-header">
                 🟠 ORANGE ALERT
                 <div style="font-size: 1rem; margin-top: 0.5rem;">Dissociated | Flatlined | Can't feel anything | Numb</div>
             </div>
-
             <div class="action-grid">
                 <div class="action-card">
                     <div class="action-title">🚶 Walk Maya (No Headphones)</div>
                     <div class="action-desc">30-40 minutes. Pay attention to the ground under your feet. Count your steps if you need to.</div>
                     <div class="action-why">Why: Movement without stimulation. Rhythm helps regulate. Nature grounds.</div>
                 </div>
-
                 <div class="action-card">
                     <div class="action-title">🫁 Somatic Exercises</div>
                     <div class="action-desc">Body scan, shaking, grounding techniques. Focus on coming back into your body.</div>
                     <a href="resources.html" class="link-button">Go to Somatic Resources</a>
                     <div class="action-why">Why: You're disconnected from your body. These reconnect you.</div>
                 </div>
-
                 <div class="action-card">
                     <div class="action-title">🎨 Draw Anything</div>
                     <div class="action-desc">Doesn't matter what. Scribbles. Shapes. Whatever comes out. No judgment.</div>
                     <div class="action-why">Why: Engages your hands and brain without requiring words or complex thought.</div>
                 </div>
-
                 <div class="action-card">
                     <div class="action-title">🛋️ Reading Chair + Weighted Blanket</div>
                     <div class="action-desc">Your safe spot. Get the blanket. Sit. You can read or just exist.</div>
                     <div class="action-why">Why: Known safe space. Physical weight is grounding and containing.</div>
                 </div>
-
-                <div class="action-card">
-                    <div class="action-title">🫖 Make Coffee/Tea Ritual</div>
-                    <div class="action-desc">The WHOLE ritual. Grind beans, heat water, pour slowly. Focus on each step.</div>
-                    <div class="action-why">Why: Familiar routine. Sensory engagement. Small accomplishment.</div>
-                </div>
-
-                <div class="action-card">
-                    <div class="action-title">🔢 5-4-3-2-1 Grounding</div>
-                    <div class="action-desc">Name 5 things you see, 4 you hear, 3 you touch, 2 you smell, 1 you taste.</div>
-                    <div class="action-why">Why: Forces you to engage with present reality through all senses.</div>
-                </div>
             </div>
         </div>
 
-        <!-- YELLOW ALERT -->
         <div class="level level-yellow">
             <div class="level-header">
                 🟡 YELLOW ALERT
                 <div style="font-size: 1rem; margin-top: 0.5rem;">Activated | Angry (even if you don't know it) | Restless | Need to move</div>
             </div>
-
             <div class="action-grid">
                 <div class="action-card">
                     <div class="action-title">🏃 Run (5-min during Maya walk)</div>
                     <div class="action-desc">Hard. Fast. Until you're breathing hard. Then walk it off.</div>
                     <div class="action-why">Why: Discharges the activation energy. Burns through the adrenaline.</div>
                 </div>
-
                 <div class="action-card">
                     <div class="action-title">🎨 Aggressive Drawing</div>
                     <div class="action-desc">Hard pencil strokes. Scribbles. Rip paper if you need to. Channel it.</div>
                     <div class="action-why">Why: Physical expression of the energy without destruction.</div>
                 </div>
-
-                <div class="action-card">
-                    <div class="action-title">🎮 Call of Duty</div>
-                    <div class="action-desc">One game. Focus the activation into something controlled.</div>
-                    <div class="action-why">Why: Gives your activation a target. Controlled intensity.</div>
-                </div>
-
                 <div class="action-card">
                     <div class="action-title">📝 Angry Writing (Then Delete)</div>
                     <div class="action-desc">Write everything you're feeling. Swear. Rant. Be brutal. Then delete it all.</div>
                     <div class="action-why">Why: Gets it OUT of your body without sending it to anyone.</div>
                 </div>
-
-                <div class="action-card">
-                    <div class="action-title">🧹 Aggressive Cleaning</div>
-                    <div class="action-desc">10-minute kitchen clean but HARD. Scrub something. Channel the energy.</div>
-                    <div class="action-why">Why: Physical movement + accomplishment + discharge.</div>
-                </div>
-
-                <div class="action-card">
-                    <div class="action-title">🫁 Breath of Fire</div>
-                    <div class="action-desc">Rapid breathing technique to discharge activation.</div>
-                    <a href="resources.html" class="link-button">Go to Breathing Exercises</a>
-                    <div class="action-why">Why: Moves the energy through your system quickly.</div>
-                </div>
             </div>
-
-            <div class="important-note" style="border-color: #ffff00; background: rgba(255, 255, 0, 0.1);">
+            <div class="important-note" style="border-color: var(--burnt-orange); background: rgba(184, 92, 56, 0.1);">
                 <strong>IMPORTANT:</strong> When you're activated/angry, DO NOT try to talk about your feelings. You'll cry and it'll destabilize you more. Move first, talk later (if at all).
             </div>
         </div>
 
-        <!-- GREEN ZONE -->
         <div class="level level-green">
             <div class="level-header">
                 🟢 GREEN ZONE
                 <div style="font-size: 1rem; margin-top: 0.5rem;">Preventative | Maintenance | Baseline</div>
             </div>
-
             <div class="action-grid">
                 <div class="action-card">
                     <div class="action-title">☕ Pret Routine (Sundays)</div>
                     <div class="action-desc">Your weekly ritual. Coffee, reading, one hour of just existing in public.</div>
                     <div class="action-why">Why: Maintains connection to routine and gentle social exposure.</div>
                 </div>
-
                 <div class="action-card">
                     <div class="action-title">📝 Therapy Prep (Tuesdays)</div>
                     <div class="action-desc">Before 5pm session, write down: what happened this week, patterns noticed, questions for Anahi.</div>
                     <div class="action-why">Why: Makes therapy more effective. Tracks patterns.</div>
                 </div>
-
-                <div class="action-card">
-                    <div class="action-title">🌱 Tend to Plants</div>
-                    <div class="action-desc">Water, check soil, talk to them if you want. Small acts of nurturing.</div>
-                    <div class="action-why">Why: Practicing care for living things. Gentle responsibility.</div>
-                </div>
-
                 <div class="action-card">
                     <div class="action-title">🎨 Daily Drawing Practice</div>
                     <div class="action-desc">Your current thing. Keep at it. Doesn't need to be good.</div>
                     <div class="action-why">Why: Consistent creative outlet. Self-expression without words.</div>
                 </div>
-
-                <div class="action-card">
-                    <div class="action-title">📖 Reading Chair Time</div>
-                    <div class="action-desc">Evening ritual. 30 minutes minimum. No phone.</div>
-                    <div class="action-why">Why: Decompression. Mental escape. Routine.</div>
-                </div>
-
-                <div class="action-card">
-                    <div class="action-title">🐕 Quality Maya Time</div>
-                    <div class="action-desc">Not just walks. Play, brush, just sit with her. Be present.</div>
-                    <div class="action-why">Why: Connection with a being who just loves you. Simple.</div>
-                </div>
             </div>
         </div>
     </div>
-
     <script>
         function emailAnahi() {
             const subject = encodeURIComponent('URGENT: Need Support');
-            const body = encodeURIComponent(`Anahi,
-
-I'm struggling right now and need support.
-
-Current state: [describe briefly - SI thoughts/dissociated/flatlined/etc]
-What happened: [if you know what triggered this]
-What I need: [immediate help/next session check-in/just wanted you to know]
-
-- Mandy
-
-Sent from Emergency Protocol: ${new Date().toLocaleString('en-GB')}`);
-            
+            const body = encodeURIComponent(`Anahi,\n\nI'm struggling right now and need support.\n\nCurrent state: [describe briefly - SI thoughts/dissociated/flatlined/etc]\nWhat happened: [if you know what triggered this]\nWhat I need: [immediate help/next session check-in/just wanted you to know]\n\n- Mandy\n\nSent from Emergency Protocol: ${new Date().toLocaleString('en-GB')}`);
             window.location.href = `mailto:anahi@therapist.com?subject=${subject}&body=${body}`;
         }
-
-        // Check for hash on load
         window.addEventListener('load', function() {
             if (window.location.hash) {
                 const element = document.querySelector(window.location.hash);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
             }
         });
     </script>

@@ -4,183 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>State Check | Emergency Protocol</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #0a0a0a;
-            --text: #f0f0f0;
-            --accent: #ff3333;
-            --warning: #ffaa00;
-            --safe: #00ff88;
-            --border: #333;
-            --hover: #1a1a1a;
+            --deep-brown: #1a1310;
+            --dark-brown: #2d1f1a;
+            --medium-brown: #5c4a3d;
+            --cream: #f4ead5;
+            --gold: #c9a961;
+            --burgundy: #6b2c2c;
+            --burnt-orange: #b85c38;
         }
-
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Courier Prime', monospace;
-            line-height: 1.6;
+            background: linear-gradient(135deg, var(--deep-brown) 0%, var(--dark-brown) 100%);
+            color: var(--cream);
+            font-family: 'Crimson Text', serif;
+            line-height: 1.8;
             min-height: 100vh;
-            padding: 1rem;
+            padding: 2rem 1rem;
         }
-
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
+        .container { max-width: 700px; margin: 0 auto; }
         h1 {
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Cinzel', serif;
             font-size: clamp(2rem, 6vw, 3.5rem);
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
             margin-bottom: 0.5rem;
-            color: var(--accent);
+            color: var(--gold);
             text-transform: uppercase;
         }
-
         .back-btn {
             display: inline-block;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            margin-bottom: 1rem;
-            transition: all 0.2s ease;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--medium-brown);
+            margin-bottom: 1.5rem;
+            background: rgba(45, 31, 26, 0.6);
+            transition: all 0.3s ease;
         }
-
-        .back-btn:hover {
-            border-color: var(--accent);
-            background: var(--hover);
-        }
-
+        .back-btn:hover { border-color: var(--gold); }
         .intro {
-            background: var(--hover);
+            background: rgba(93, 74, 61, 0.3);
             padding: 1.5rem;
             margin-bottom: 2rem;
-            border-left: 4px solid var(--warning);
+            border-left: 3px solid var(--burnt-orange);
         }
-
         .question-container {
             display: none;
-            background: var(--hover);
+            background: rgba(45, 31, 26, 0.8);
             padding: 2rem;
             margin-bottom: 1rem;
-            border: 2px solid var(--border);
+            border: 1px solid var(--medium-brown);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-
         .question-container.active {
             display: block;
             animation: slideIn 0.3s ease;
         }
-
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         .question-text {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
             margin-bottom: 1.5rem;
-            color: var(--warning);
+            color: var(--gold);
         }
-
         .answer-btn {
             display: block;
             width: 100%;
             padding: 1rem;
             margin-bottom: 0.5rem;
-            background: var(--bg);
-            color: var(--text);
-            border: 2px solid var(--border);
-            font-family: 'Courier Prime', monospace;
+            background: rgba(29, 19, 16, 0.8);
+            color: var(--cream);
+            border: 1px solid var(--medium-brown);
+            font-family: 'Crimson Text', serif;
             font-size: 1rem;
             cursor: pointer;
             text-align: left;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
-
         .answer-btn:hover {
-            border-color: var(--accent);
-            background: var(--hover);
+            border-color: var(--gold);
+            background: rgba(93, 74, 61, 0.3);
             transform: translateX(4px);
         }
-
         .result {
             display: none;
-            background: var(--accent);
-            color: var(--bg);
+            background: linear-gradient(135deg, var(--burgundy) 0%, #4a1f1f 100%);
+            color: var(--cream);
             padding: 2rem;
-            border: 4px solid var(--accent);
+            border: 2px solid var(--burgundy);
+            box-shadow: 0 4px 30px rgba(107, 44, 44, 0.4);
         }
-
         .result.show {
             display: block;
             animation: slideIn 0.3s ease;
         }
-
         .result h2 {
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Cinzel', serif;
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            letter-spacing: 0.05em;
         }
-
-        .result ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .result a {
-            color: var(--bg);
-            text-decoration: underline;
-            font-weight: bold;
-        }
-
+        .result ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+        .result a { color: var(--gold); text-decoration: underline; }
         .restart-btn {
-            background: var(--bg);
-            color: var(--accent);
-            border: 2px solid var(--bg);
+            background: var(--cream);
+            color: var(--burgundy);
+            border: 2px solid var(--cream);
             padding: 0.8rem 1.5rem;
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Cinzel', serif;
             font-size: 1.2rem;
             cursor: pointer;
             margin-top: 1rem;
         }
-
         .restart-btn:hover {
-            background: var(--text);
-            transform: scale(1.02);
+            background: var(--gold);
+            border-color: var(--gold);
         }
-
-        a {
-            color: var(--text);
-            text-decoration: none;
-        }
+        a { color: var(--cream); text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="index.html" class="back-btn">← Back to Dashboard</a>
-        
         <h1>🧠 State Check</h1>
-        
         <div class="intro">
-            <strong>Not sure what the fuck you're experiencing?</strong> Let's figure out if you're flatlined, dissociated, frozen, or something else. Answer honestly - there's no wrong answer.
+            <strong>Not sure what you're experiencing?</strong> Let's figure out if you're flatlined, dissociated, frozen, or something else. Answer honestly—there's no wrong answer.
         </div>
-
         <div class="question-container active" id="q1">
             <div class="question-text">Can you feel your body right now?</div>
             <button class="answer-btn" onclick="answer('q1', 'numbEverywhere')">No, I'm numb everywhere / Can't feel anything</button>
@@ -188,7 +140,6 @@
             <button class="answer-btn" onclick="answer('q1', 'yesButWeird')">Yes but it feels weird/disconnected/not mine</button>
             <button class="answer-btn" onclick="answer('q1', 'yes')">Yes, I can feel my body</button>
         </div>
-
         <div class="question-container" id="q2">
             <div class="question-text">Are you here right now? Like actually present?</div>
             <button class="answer-btn" onclick="answer('q2', 'notReally')">Not really, I'm floating/watching myself/far away</button>
@@ -196,7 +147,6 @@
             <button class="answer-btn" onclick="answer('q2', 'stuck')">I'm here but I'm stuck/frozen</button>
             <button class="answer-btn" onclick="answer('q2', 'yes')">Yeah, I'm present</button>
         </div>
-
         <div class="question-container" id="q3">
             <div class="question-text">Can you think clearly?</div>
             <button class="answer-btn" onclick="answer('q3', 'foggy')">No, everything's foggy/slow/unclear</button>
@@ -204,7 +154,6 @@
             <button class="answer-btn" onclick="answer('q3', 'blank')">My mind is completely blank/empty</button>
             <button class="answer-btn" onclick="answer('q3', 'mostly')">Mostly, yeah</button>
         </div>
-
         <div class="question-container" id="q4">
             <div class="question-text">What time of day is it?</div>
             <button class="answer-btn" onclick="answer('q4', 'evening')">5pm-8pm (your flatline window)</button>
@@ -212,7 +161,6 @@
             <button class="answer-btn" onclick="answer('q4', 'night')">Night (after 8pm)</button>
             <button class="answer-btn" onclick="answer('q4', 'afternoon')">Afternoon (noon-5pm)</button>
         </div>
-
         <div class="question-container" id="q5">
             <div class="question-text">Do you want to do anything?</div>
             <button class="answer-btn" onclick="answer('q5', 'nothing')">No. Zero motivation. Everything feels pointless.</button>
@@ -220,168 +168,85 @@
             <button class="answer-btn" onclick="answer('q5', 'restless')">Yes but I'm too restless/activated to pick</button>
             <button class="answer-btn" onclick="answer('q5', 'yes')">Yeah, I could do something</button>
         </div>
-
         <div class="result" id="result">
             <h2 id="result-title"></h2>
             <div id="result-content"></div>
             <button class="restart-btn" onclick="restart()">Start Over</button>
         </div>
     </div>
-
     <script>
-        let answers = {};
-        let currentQ = 1;
-
+        let answers = {}, currentQ = 1;
         function answer(questionId, value) {
             answers[questionId] = value;
-            
             document.getElementById(questionId).classList.remove('active');
-            
             currentQ++;
-            
             if (currentQ <= 5) {
                 document.getElementById('q' + currentQ).classList.add('active');
             } else {
                 analyzeState();
             }
         }
-
         function analyzeState() {
-            const resultDiv = document.getElementById('result');
             const titleDiv = document.getElementById('result-title');
             const contentDiv = document.getElementById('result-content');
-            
-            let state = '';
-            let content = '';
-            
-            // Dissociation check
+            let state = '', content = '';
             if (answers.q1 === 'yesButWeird' || answers.q2 === 'notReally') {
                 state = 'DISSOCIATION';
-                content = `
-                    <p><strong>You're dissociated.</strong> You're here but not here. Floating. Disconnected from your body. This is your nervous system's way of protecting you from overwhelm.</p>
-                    <p><strong>What this means:</strong></p>
-                    <ul>
-                        <li>Your brain has temporarily disconnected you to keep you safe</li>
-                        <li>This is a protective trauma response, not you "being dramatic"</li>
-                        <li>You need grounding techniques to come back into your body</li>
-                    </ul>
-                    <p><strong>What to do RIGHT NOW:</strong></p>
-                    <ul>
-                        <li><a href="resources.html">Grounding/somatic exercises</a> - specifically body scans</li>
-                        <li>Physical sensations: Hot bath, ice on skin, weighted blanket</li>
-                        <li>5-4-3-2-1 technique: Name 5 things you see, 4 you hear, 3 you touch, 2 you smell, 1 you taste</li>
-                        <li>Walk Maya - movement helps</li>
-                        <li>Do NOT try to "think your way out" - this is a body thing</li>
-                    </ul>
-                    <p><a href="actions.html">→ Full action menu</a></p>
-                `;
-            }
-            // Flatline/Depression check
-            else if (answers.q1 === 'numbEverywhere' || answers.q3 === 'blank' || answers.q5 === 'nothing') {
+                content = `<p><strong>You're dissociated.</strong> You're here but not here. Floating. Disconnected from your body. This is your nervous system's way of protecting you from overwhelm.</p>
+                    <p><strong>What to do:</strong></p><ul>
+                    <li><a href="resources.html">Grounding/somatic exercises</a> - specifically body scans</li>
+                    <li>Physical sensations: Hot bath, ice on skin, weighted blanket</li>
+                    <li>5-4-3-2-1: Name 5 things you see, 4 hear, 3 touch, 2 smell, 1 taste</li>
+                    <li>Walk Maya - movement helps</li></ul>
+                    <p><a href="actions.html">→ Full action menu</a></p>`;
+            } else if (answers.q1 === 'numbEverywhere' || answers.q3 === 'blank' || answers.q5 === 'nothing') {
                 state = 'FLATLINE / DEPRESSION';
-                content = `
-                    <p><strong>You're flatlined.</strong> Nothing's online. Everything feels empty, pointless, void. The 5pm-8pm type feeling.</p>
-                    <p><strong>What this means:</strong></p>
-                    <ul>
-                        <li>Your nervous system has shut down to conserve energy</li>
-                        <li>This often happens after prolonged stress or as protection</li>
-                        <li>You're not lazy or broken - you're depleted</li>
-                    </ul>
-                    <p><strong>What to do RIGHT NOW:</strong></p>
-                    <ul>
-                        <li>Small movements: Just stand up, walk to another room</li>
-                        <li>Maya walk - even 5 minutes helps</li>
-                        <li>Drawing - doesn't require thinking</li>
-                        <li>Reading chair time with weighted blanket</li>
-                        <li><a href="resources.html">Gentle somatic exercises</a></li>
-                        <li>Do NOT force yourself into high-energy activities</li>
-                        <li>Do NOT call yourself lazy - this is a physiological state</li>
-                    </ul>
-                    ${answers.q4 === 'evening' ? '<p><strong>Note:</strong> You're in your known 5pm-8pm flatline window. This is a pattern. Expect this. Plan low-demand activities for this time.</p>' : ''}
-                    <p><a href="actions.html">→ Full action menu</a></p>
-                `;
-            }
-            // Freeze response check
-            else if (answers.q2 === 'stuck' || answers.q5 === 'cant') {
+                content = `<p><strong>You're flatlined.</strong> Nothing's online. Everything feels empty, pointless, void. The 5pm-8pm type feeling.</p>
+                    <p><strong>What to do:</strong></p><ul>
+                    <li>Small movements: Just stand up, walk to another room</li>
+                    <li>Maya walk - even 5 minutes helps</li>
+                    <li>Drawing - doesn't require thinking</li>
+                    <li>Reading chair time with weighted blanket</li>
+                    <li><a href="resources.html">Gentle somatic exercises</a></li></ul>
+                    ${answers.q4 === 'evening' ? '<p><strong>Note:</strong> You\'re in your known 5pm-8pm flatline window. This is a pattern. Expect this. Plan low-demand activities for this time.</p>' : ''}
+                    <p><a href="actions.html">→ Full action menu</a></p>`;
+            } else if (answers.q2 === 'stuck' || answers.q5 === 'cant') {
                 state = 'FREEZE RESPONSE';
-                content = `
-                    <p><strong>You're frozen.</strong> You're here, you're present, but you can't move. Your nervous system has hit the brakes hard.</p>
-                    <p><strong>What this means:</strong></p>
-                    <ul>
-                        <li>Your body perceives threat and has immobilized</li>
-                        <li>This is the "deer in headlights" response</li>
-                        <li>You're not being stubborn or difficult - you're literally stuck</li>
-                    </ul>
-                    <p><strong>What to do RIGHT NOW:</strong></p>
-                    <ul>
-                        <li>Start TINY: Wiggle your fingers, shake your hands</li>
-                        <li><a href="resources.html">Somatic shaking exercises</a> - specifically trauma release</li>
-                        <li>Stand up, even if you don't go anywhere</li>
-                        <li>Rock back and forth, sway side to side</li>
-                        <li>Once you can move: Walk, run, physical discharge</li>
-                        <li>Do NOT force big actions - work up gradually</li>
-                    </ul>
-                    <p><a href="actions.html">→ Full action menu</a></p>
-                `;
-            }
-            // Anxiety/Activation check
-            else if (answers.q3 === 'racing' || answers.q5 === 'restless') {
+                content = `<p><strong>You're frozen.</strong> You're here, you're present, but you can't move. Your nervous system has hit the brakes hard.</p>
+                    <p><strong>What to do:</strong></p><ul>
+                    <li>Start TINY: Wiggle your fingers, shake your hands</li>
+                    <li><a href="resources.html">Somatic shaking exercises</a> - specifically trauma release</li>
+                    <li>Stand up, even if you don't go anywhere</li>
+                    <li>Rock back and forth, sway side to side</li></ul>
+                    <p><a href="actions.html">→ Full action menu</a></p>`;
+            } else if (answers.q3 === 'racing' || answers.q5 === 'restless') {
                 state = 'ACTIVATED / ANXIOUS';
-                content = `
-                    <p><strong>You're activated.</strong> Energy is high, thoughts are racing, you're restless. Your alarm system is firing.</p>
-                    <p><strong>What this means:</strong></p>
-                    <ul>
-                        <li>Your sympathetic nervous system is in overdrive</li>
-                        <li>You have energy that needs to be discharged</li>
-                        <li>This can be anxiety, panic, or anger underneath</li>
-                    </ul>
-                    <p><strong>What to do RIGHT NOW:</strong></p>
-                    <ul>
-                        <li>MOVE: Run, walk Maya, physical activity to discharge</li>
-                        <li><a href="resources.html">Breathing exercises</a> (SheBreath)</li>
-                        <li>Drawing to channel the energy</li>
-                        <li>COD if you need to focus the activation</li>
-                        <li>Avoid caffeine if you haven't had it yet</li>
-                        <li>Do NOT try to "calm down" - discharge first, then regulate</li>
-                    </ul>
-                    <p><a href="actions.html">→ Full action menu</a></p>
-                `;
-            }
-            // Default/unclear state
-            else {
+                content = `<p><strong>You're activated.</strong> Energy is high, thoughts are racing, you're restless. Your alarm system is firing.</p>
+                    <p><strong>What to do:</strong></p><ul>
+                    <li>MOVE: Run, walk Maya, physical activity to discharge</li>
+                    <li><a href="resources.html">Breathing exercises</a> (SheBreath)</li>
+                    <li>Drawing to channel the energy</li>
+                    <li>Avoid caffeine if you haven't had it yet</li></ul>
+                    <p><a href="actions.html">→ Full action menu</a></p>`;
+            } else {
                 state = 'UNCLEAR / MIXED STATE';
-                content = `
-                    <p><strong>Your state isn't clear-cut right now.</strong> That's okay. Sometimes it's a mix, or it's shifting, or it's something else entirely.</p>
-                    <p><strong>Try this:</strong></p>
-                    <ul>
-                        <li><a href="body-map.html">Use the Body Map</a> - physical sensations can help clarify</li>
-                        <li>Check in: Have you eaten? Slept? When did this start?</li>
-                        <li>Default to gentle grounding: <a href="resources.html">Somatic exercises</a></li>
-                        <li>Maya walk - movement usually helps regardless</li>
-                    </ul>
-                    <p><strong>If you're having SI thoughts or feeling unsafe:</strong></p>
-                    <ul>
-                        <li><a href="index.html">Email Anahi immediately</a></li>
-                        <li><a href="actions.html#red">Red Alert actions</a></li>
-                    </ul>
-                `;
+                content = `<p><strong>Your state isn't clear-cut right now.</strong> That's okay. Sometimes it's a mix, or it's shifting.</p>
+                    <p><strong>Try this:</strong></p><ul>
+                    <li><a href="body-map.html">Use the Body Map</a> - physical sensations can help clarify</li>
+                    <li>Check in: Have you eaten? Slept? When did this start?</li>
+                    <li>Default to gentle grounding: <a href="resources.html">Somatic exercises</a></li></ul>
+                    <p><strong>If you're having SI thoughts or feeling unsafe:</strong></p><ul>
+                    <li><a href="index.html">Email Anahi immediately</a></li>
+                    <li><a href="actions.html#red">Red Alert actions</a></li></ul>`;
             }
-            
             titleDiv.textContent = state;
             contentDiv.innerHTML = content;
-            resultDiv.classList.add('show');
+            document.getElementById('result').classList.add('show');
         }
-
         function restart() {
-            answers = {};
-            currentQ = 1;
-            
+            answers = {}; currentQ = 1;
             document.getElementById('result').classList.remove('show');
-            
-            for (let i = 1; i <= 5; i++) {
-                document.getElementById('q' + i).classList.remove('active');
-            }
-            
+            for (let i = 1; i <= 5; i++) document.getElementById('q' + i).classList.remove('active');
             document.getElementById('q1').classList.add('active');
         }
     </script>

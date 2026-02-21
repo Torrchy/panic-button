@@ -4,185 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Somatic Resources | Emergency Protocol</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #0a0a0a;
-            --text: #f0f0f0;
-            --accent: #ff3333;
-            --warning: #ffaa00;
-            --safe: #00ff88;
-            --border: #333;
-            --hover: #1a1a1a;
+            --deep-brown: #1a1310; --dark-brown: #2d1f1a; --medium-brown: #5c4a3d;
+            --cream: #f4ead5; --gold: #c9a961; --burgundy: #6b2c2c; --burnt-orange: #b85c38;
         }
-
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Courier Prime', monospace;
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 1rem;
+            background: linear-gradient(135deg, var(--deep-brown) 0%, var(--dark-brown) 100%);
+            color: var(--cream); font-family: 'Crimson Text', serif; line-height: 1.8;
+            min-height: 100vh; padding: 2rem 1rem;
         }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
+        .container { max-width: 900px; margin: 0 auto; }
         h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-            text-transform: uppercase;
+            font-family: 'Cinzel', serif; font-size: clamp(2rem, 6vw, 3.5rem);
+            letter-spacing: 0.1em; margin-bottom: 0.5rem; color: var(--gold); text-transform: uppercase;
         }
-
         .back-btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            margin-bottom: 1rem;
-            transition: all 0.2s ease;
+            display: inline-block; padding: 0.8rem 1.5rem; border: 1px solid var(--medium-brown);
+            margin-bottom: 1.5rem; background: rgba(45, 31, 26, 0.6); transition: all 0.3s ease;
         }
-
-        .back-btn:hover {
-            border-color: var(--accent);
-            background: var(--hover);
-        }
-
+        .back-btn:hover { border-color: var(--gold); }
         .intro {
-            background: var(--hover);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--warning);
+            background: rgba(93, 74, 61, 0.3); padding: 1.5rem; margin-bottom: 2rem;
+            border-left: 3px solid var(--burnt-orange);
         }
-
-        .section {
-            margin-bottom: 3rem;
-        }
-
+        .section { margin-bottom: 3rem; }
         .section-header {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--warning);
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 0.5rem;
+            font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 1rem;
+            color: var(--gold); border-bottom: 2px solid var(--medium-brown); padding-bottom: 0.5rem;
         }
-
         .resource-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;
         }
-
-        .resource-card {
-            background: var(--hover);
-            border: 2px solid var(--border);
-            padding: 1.5rem;
-            transition: all 0.2s ease;
+        .resource-card, .technique-card {
+            background: rgba(45, 31, 26, 0.8); border: 1px solid var(--medium-brown);
+            padding: 1.5rem; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-
-        .resource-card:hover {
-            border-color: var(--accent);
-            transform: translateX(4px);
+        .resource-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+        .resource-title, .technique-title {
+            font-family: 'Cinzel', serif; font-size: 1.4rem; margin-bottom: 0.5rem;
+            color: var(--gold); letter-spacing: 0.05em;
         }
-
-        .resource-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--safe);
-        }
-
-        .resource-desc {
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
+        .resource-desc { font-size: 0.95rem; margin-bottom: 1rem; }
         .resource-link {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            text-decoration: none;
-            transition: all 0.2s ease;
+            display: inline-block; padding: 0.5rem 1rem; border: 1px solid var(--burnt-orange);
+            color: var(--burnt-orange); text-decoration: none; transition: all 0.3s ease;
         }
-
-        .resource-link:hover {
-            background: var(--accent);
-            color: var(--bg);
-        }
-
-        .duration {
-            font-size: 0.8rem;
-            opacity: 0.7;
-            margin-top: 0.5rem;
-        }
-
-        .technique-card {
-            background: var(--hover);
-            border: 2px solid var(--border);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .technique-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--safe);
-        }
-
-        .technique-steps {
-            margin-top: 0.5rem;
-        }
-
-        .technique-steps ol {
-            margin-left: 1.5rem;
-        }
-
-        .technique-steps li {
-            margin-bottom: 0.3rem;
-        }
-
+        .resource-link:hover { background: var(--burnt-orange); color: var(--cream); }
+        .duration { font-size: 0.85rem; opacity: 0.7; margin-top: 0.5rem; font-style: italic; }
+        .technique-steps ol { margin-left: 1.5rem; margin-top: 0.5rem; }
+        .technique-steps li { margin-bottom: 0.3rem; }
         .when-to-use {
-            background: rgba(255, 170, 0, 0.1);
-            border-left: 3px solid var(--warning);
-            padding: 0.8rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
+            background: rgba(184, 92, 56, 0.2); border-left: 3px solid var(--burnt-orange);
+            padding: 0.8rem; margin-top: 1rem; font-size: 0.9rem;
         }
-
-        a {
-            color: var(--text);
-        }
+        a { color: var(--cream); }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="index.html" class="back-btn">← Back to Dashboard</a>
-        
         <h1>🫁 Somatic Resources</h1>
-        
         <div class="intro">
             <strong>These are body-based techniques</strong> to help you regulate your nervous system. When you can't think your way out, use your body. Links go to YouTube or instructional resources.
         </div>
 
-        <!-- YOUTUBE CHANNELS -->
         <div class="section">
             <div class="section-header">📺 YouTube Channels (Your Go-Tos)</div>
-            
             <div class="resource-grid">
                 <div class="resource-card">
                     <div class="resource-title">SheBreath</div>
@@ -190,48 +80,29 @@
                     <a href="https://www.youtube.com/@SheBreath" target="_blank" class="resource-link">Go to Channel →</a>
                     <div class="duration">Exercises: 5-20 minutes</div>
                 </div>
-
                 <div class="resource-card">
                     <div class="resource-title">The Holistic Psychologist</div>
                     <div class="resource-desc">Dr. Nicole LePera. Somatic exercises, trauma healing, nervous system work. Good explanations + practice.</div>
                     <a href="https://www.youtube.com/@the.holistic.psychologist" target="_blank" class="resource-link">Go to Channel →</a>
                     <div class="duration">Exercises: 10-30 minutes</div>
                 </div>
-
                 <div class="resource-card">
                     <div class="resource-title">Irene Lyon</div>
                     <div class="resource-desc">Nervous system healing, trauma release, somatic experiencing. More in-depth work.</div>
                     <a href="https://www.youtube.com/@IreneLyon" target="_blank" class="resource-link">Go to Channel →</a>
                     <div class="duration">Exercises: 15-45 minutes</div>
                 </div>
-
                 <div class="resource-card">
                     <div class="resource-title">Therapy in a Nutshell</div>
                     <div class="resource-desc">Emma McAdam. Grounding techniques, anxiety management, nervous system education. Clear instructions.</div>
                     <a href="https://www.youtube.com/@TherapyinaNutshell" target="_blank" class="resource-link">Go to Channel →</a>
                     <div class="duration">Exercises: 5-20 minutes</div>
                 </div>
-
-                <div class="resource-card">
-                    <div class="resource-title">Somatic Experiencing International</div>
-                    <div class="resource-desc">Official SE channel. Trauma release exercises, pendulation, grounding. Clinical but accessible.</div>
-                    <a href="https://www.youtube.com/@SETrauma" target="_blank" class="resource-link">Go to Channel →</a>
-                    <div class="duration">Exercises: 10-30 minutes</div>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-title">Sukie Baxter</div>
-                    <div class="resource-desc">Whole Body Revolution. Trauma release, shaking, full-body practices. When you need BIG discharge.</div>
-                    <a href="https://www.youtube.com/@sukiebaxter" target="_blank" class="resource-link">Go to Channel →</a>
-                    <div class="duration">Exercises: 20-60 minutes</div>
-                </div>
             </div>
         </div>
 
-        <!-- QUICK TECHNIQUES -->
         <div class="section">
             <div class="section-header">⚡ Quick Techniques (No Video Needed)</div>
-
             <div class="technique-card">
                 <div class="technique-title">Box Breathing (4-4-4-4)</div>
                 <div class="technique-steps">
@@ -245,20 +116,6 @@
                 </div>
                 <div class="when-to-use"><strong>Use when:</strong> Panic, anxiety, can't catch your breath, need immediate regulation</div>
             </div>
-
-            <div class="technique-card">
-                <div class="technique-title">Physiological Sigh</div>
-                <div class="technique-steps">
-                    <ol>
-                        <li>Quick inhale through nose</li>
-                        <li>Second quick inhale through nose (double inhale)</li>
-                        <li>LONG exhale through mouth</li>
-                        <li>Repeat 3-5 times</li>
-                    </ol>
-                </div>
-                <div class="when-to-use"><strong>Use when:</strong> Need fast calm-down, before important conversation, acute stress</div>
-            </div>
-
             <div class="technique-card">
                 <div class="technique-title">Butterfly Hug (Bilateral Stimulation)</div>
                 <div class="technique-steps">
@@ -272,34 +129,6 @@
                 </div>
                 <div class="when-to-use"><strong>Use when:</strong> Dissociated, triggered, need self-soothing, EMDR-like processing</div>
             </div>
-
-            <div class="technique-card">
-                <div class="technique-title">Havening (Self-Soothing Touch)</div>
-                <div class="technique-steps">
-                    <ol>
-                        <li>Stroke your arms from shoulder to elbow, slowly</li>
-                        <li>Or stroke your face gently (forehead to cheeks)</li>
-                        <li>Or rub your palms together then cup your face</li>
-                        <li>Slow, gentle, repetitive</li>
-                        <li>Do for 2-10 minutes</li>
-                    </ol>
-                </div>
-                <div class="when-to-use"><strong>Use when:</strong> Need comfort, alone and scared, before sleep, after nightmare</div>
-            </div>
-
-            <div class="technique-card">
-                <div class="technique-title">Voo Breath (Vagal Toning)</div>
-                <div class="technique-steps">
-                    <ol>
-                        <li>Take a deep breath in</li>
-                        <li>On exhale, make a low "vooooo" sound (feel vibration in chest)</li>
-                        <li>Let it be long and slow</li>
-                        <li>Repeat 5-10 times</li>
-                    </ol>
-                </div>
-                <div class="when-to-use"><strong>Use when:</strong> Frozen, shut down, need to activate vagal nerve, feeling trapped</div>
-            </div>
-
             <div class="technique-card">
                 <div class="technique-title">Shaking/TRE (Trauma Release)</div>
                 <div class="technique-steps">
@@ -313,7 +142,6 @@
                 </div>
                 <div class="when-to-use"><strong>Use when:</strong> Frozen, after trigger, activation needs discharge, body feels stuck</div>
             </div>
-
             <div class="technique-card">
                 <div class="technique-title">Cold Water/Ice</div>
                 <div class="technique-steps">
@@ -326,91 +154,18 @@
                 </div>
                 <div class="when-to-use"><strong>Use when:</strong> Dissociated, panic, SI urges, need immediate grounding, numbness</div>
             </div>
-
             <div class="technique-card">
-                <div class="technique-title">Progressive Muscle Relaxation</div>
+                <div class="technique-title">5-4-3-2-1 Grounding</div>
                 <div class="technique-steps">
                     <ol>
-                        <li>Start with your feet - tense them hard for 5 seconds</li>
-                        <li>Release and notice the difference</li>
-                        <li>Move up: calves, thighs, stomach, chest, arms, shoulders, face</li>
-                        <li>Tense each area for 5 seconds, then release</li>
-                        <li>Full body takes 10-15 minutes</li>
+                        <li>Name 5 things you can see</li>
+                        <li>Name 4 things you can hear</li>
+                        <li>Name 3 things you can touch</li>
+                        <li>Name 2 things you can smell</li>
+                        <li>Name 1 thing you can taste</li>
                     </ol>
                 </div>
-                <div class="when-to-use"><strong>Use when:</strong> Can't sleep, body is tense, holding trauma, before bed</div>
-            </div>
-        </div>
-
-        <!-- SPECIFIC PLAYLISTS -->
-        <div class="section">
-            <div class="section-header">🎵 Specific Playlists/Videos</div>
-
-            <div class="resource-grid">
-                <div class="resource-card">
-                    <div class="resource-title">10-Minute Somatic Exercises (SheBreath)</div>
-                    <div class="resource-desc">Quick daily practice. Good for maintenance and 5pm-8pm flatline window.</div>
-                    <a href="https://www.youtube.com/results?search_query=shebreath+10+minute+somatic" target="_blank" class="resource-link">Search Videos →</a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-title">Grounding for Dissociation</div>
-                    <div class="resource-desc">When you're floating away. Multiple techniques to try.</div>
-                    <a href="https://www.youtube.com/results?search_query=grounding+techniques+dissociation" target="_blank" class="resource-link">Search Videos →</a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-title">Trauma Release Exercises (TRE)</div>
-                    <div class="resource-desc">Full shaking/release protocol. When freeze response is strong.</div>
-                    <a href="https://www.youtube.com/results?search_query=trauma+release+exercises+tre" target="_blank" class="resource-link">Search Videos →</a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-title">Vagus Nerve Activation</div>
-                    <div class="resource-desc">Toning, humming, specific exercises to reset your nervous system.</div>
-                    <a href="https://www.youtube.com/results?search_query=vagus+nerve+exercises" target="_blank" class="resource-link">Search Videos →</a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-title">EMDR Bilateral Stimulation</div>
-                    <div class="resource-desc">Self-administered EMDR for processing. Use carefully.</div>
-                    <a href="https://www.youtube.com/results?search_query=emdr+self+administered" target="_blank" class="resource-link">Search Videos →</a>
-                </div>
-
-                <div class="resource-card">
-                    <div class="resource-title">Body Scan Meditation</div>
-                    <div class="resource-desc">For reconnecting with your body when dissociated. Guided.</div>
-                    <a href="https://www.youtube.com/results?search_query=body+scan+meditation+trauma" target="_blank" class="resource-link">Search Videos →</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ADDITIONAL RESOURCES -->
-        <div class="section">
-            <div class="section-header">📚 Additional Resources</div>
-
-            <div class="technique-card">
-                <div class="technique-title">Apps (If You Want Them)</div>
-                <div class="resource-desc">
-                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                        <li><strong>Insight Timer:</strong> Free meditation/somatic exercises library</li>
-                        <li><strong>Curable:</strong> Pain science + somatic practices (good for IBS/TMJ)</li>
-                        <li><strong>Safe and Sound Protocol:</strong> Polyvagal theory-based (paid)</li>
-                        <li><strong>DARE:</strong> Anxiety/panic management with somatic focus</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="technique-card">
-                <div class="technique-title">Books (For Later, Not Crisis)</div>
-                <div class="resource-desc">
-                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                        <li><strong>"The Body Keeps the Score"</strong> - Bessel van der Kolk (trauma in the body)</li>
-                        <li><strong>"Waking the Tiger"</strong> - Peter Levine (somatic experiencing)</li>
-                        <li><strong>"How to Do the Work"</strong> - Dr. Nicole LePera (practical exercises)</li>
-                        <li><strong>"What Happened to You?"</strong> - Oprah & Dr. Perry (trauma understanding)</li>
-                    </ul>
-                </div>
+                <div class="when-to-use"><strong>Use when:</strong> Dissociated, panic attack, feeling unreal, need to reconnect to present</div>
             </div>
         </div>
     </div>
