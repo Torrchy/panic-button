@@ -6,7 +6,7 @@
     <title>Emergency Protocol</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,73 +15,102 @@
         }
 
         :root {
-            --bg: #0a0a0a;
-            --text: #f0f0f0;
-            --accent: #ff3333;
-            --warning: #ffaa00;
-            --safe: #00ff88;
-            --border: #333;
-            --hover: #1a1a1a;
+            --deep-brown: #1a1310;
+            --dark-brown: #2d1f1a;
+            --medium-brown: #5c4a3d;
+            --warm-brown: #8b6f47;
+            --cream: #f4ead5;
+            --gold: #c9a961;
+            --burgundy: #6b2c2c;
+            --burnt-orange: #b85c38;
         }
 
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Courier Prime', monospace;
-            line-height: 1.6;
+            background: linear-gradient(135deg, var(--deep-brown) 0%, var(--dark-brown) 100%);
+            color: var(--cream);
+            font-family: 'Crimson Text', serif;
+            line-height: 1.8;
             min-height: 100vh;
-            padding: 1rem;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(0,0,0,.1) 0px, transparent 1px, transparent 2px, rgba(0,0,0,.1) 3px),
+                repeating-linear-gradient(90deg, rgba(0,0,0,.1) 0px, transparent 1px, transparent 2px, rgba(0,0,0,.1) 3px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            letter-spacing: 0.05em;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            letter-spacing: 0.1em;
             margin-bottom: 0.5rem;
-            color: var(--accent);
+            color: var(--gold);
             text-transform: uppercase;
-            line-height: 0.9;
-            animation: glitch 3s infinite;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: 600;
         }
 
-        @keyframes glitch {
-            0%, 100% { text-shadow: 2px 2px var(--warning), -2px -2px var(--safe); }
-            50% { text-shadow: -2px -2px var(--warning), 2px 2px var(--safe); }
+        .subtitle {
+            text-align: center;
+            font-style: italic;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
 
         .status-bar {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             margin-bottom: 2rem;
-            padding: 0.5rem;
-            border: 1px solid var(--border);
-            background: var(--hover);
-            font-weight: bold;
+            padding: 1rem;
+            border: 1px solid var(--medium-brown);
+            background: rgba(93, 74, 61, 0.2);
+            font-family: 'Crimson Text', serif;
+            text-align: center;
+            border-radius: 2px;
+            backdrop-filter: blur(10px);
         }
 
         .status-bar span {
-            color: var(--safe);
+            color: var(--gold);
+            font-weight: 600;
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
         .card {
-            border: 2px solid var(--border);
-            padding: 1.5rem;
-            background: var(--hover);
+            border: 1px solid var(--medium-brown);
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(45, 31, 26, 0.8) 0%, rgba(29, 19, 16, 0.8) 100%);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .card::before {
@@ -89,21 +118,22 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 0;
+            width: 100%;
             height: 100%;
-            background: var(--accent);
-            transition: width 0.3s ease;
+            background: linear-gradient(135deg, transparent 0%, var(--gold) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
             z-index: 0;
-            opacity: 0.1;
         }
 
         .card:hover::before {
-            width: 100%;
+            opacity: 0.05;
         }
 
         .card:hover {
-            border-color: var(--accent);
-            transform: translateX(4px);
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(201, 169, 97, 0.2);
         }
 
         .card-content {
@@ -112,73 +142,105 @@
         }
 
         .card-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
             letter-spacing: 0.05em;
+            color: var(--gold);
+            font-weight: 500;
         }
 
         .card-desc {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
         }
 
         .priority-high {
-            border-color: var(--accent);
+            border-left: 3px solid var(--burgundy);
         }
 
         .priority-medium {
-            border-color: var(--warning);
+            border-left: 3px solid var(--burnt-orange);
         }
 
         .priority-low {
-            border-color: var(--safe);
+            border-left: 3px solid var(--warm-brown);
         }
 
         .emergency-section {
-            background: var(--accent);
-            color: var(--bg);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 4px solid var(--accent);
-            animation: pulse 2s infinite;
+            background: linear-gradient(135deg, var(--burgundy) 0%, #4a1f1f 100%);
+            color: var(--cream);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 2px solid var(--burgundy);
+            box-shadow: 0 4px 30px rgba(107, 44, 44, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emergency-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
 
         .emergency-section h2 {
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Cinzel', serif;
             font-size: 2rem;
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.05em;
+        }
+
+        .emergency-section p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
         }
 
         .emergency-btn {
-            background: var(--bg);
-            color: var(--accent);
-            border: 2px solid var(--bg);
+            background: var(--cream);
+            color: var(--burgundy);
+            border: 2px solid var(--cream);
             padding: 1rem 2rem;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
             cursor: pointer;
             width: 100%;
-            margin-bottom: 0.5rem;
-            transition: all 0.2s ease;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.05em;
+            font-weight: 500;
         }
 
         .emergency-btn:hover {
-            background: var(--text);
+            background: var(--gold);
+            border-color: var(--gold);
             transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(201, 169, 97, 0.4);
         }
 
         .timestamp {
             position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            font-size: 0.75rem;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            font-size: 0.85rem;
             opacity: 0.5;
+            font-style: italic;
         }
 
         a {
@@ -190,78 +252,75 @@
             .grid {
                 grid-template-columns: 1fr;
             }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            body {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Emergency Protocol</h1>
+        <div class="subtitle">A Guide for Difficult Moments</div>
         
         <div class="status-bar">
             SYSTEM: <span>ACTIVE</span> | LOCATION: HOME | TIME: <span id="current-time"></span>
         </div>
 
         <div class="emergency-section">
-            <h2>⚠ RED ALERT PROTOCOL</h2>
-            <p style="margin-bottom: 1rem;">If you're having SI thoughts or can't think straight:</p>
-            <button class="emergency-btn" onclick="emailAnahi()">📧 EMAIL ANAHI NOW</button>
-            <button class="emergency-btn" onclick="location.href='actions.html#red'">🔴 RED ALERT ACTIONS</button>
+            <h2>⚠ Urgent Support</h2>
+            <p style="margin-bottom: 1.5rem;">If you're experiencing thoughts of self-harm or cannot think clearly:</p>
+            <button class="emergency-btn" onclick="emailAnahi()">📧 Email Anahi Now</button>
+            <button class="emergency-btn" onclick="location.href='actions.html#red'">🔴 Immediate Actions</button>
         </div>
 
         <div class="grid">
-            <a href="body-map.html">
-                <div class="card priority-high">
-                    <div class="card-content">
-                        <div class="card-title">🫀 Body Map</div>
-                        <div class="card-desc">Where the fuck are you feeling things? Click to locate.</div>
-                    </div>
+            <div class="card priority-high" onclick="location.href='body-map.html'">
+                <div class="card-content">
+                    <div class="card-title">🫀 Body Map</div>
+                    <div class="card-desc">Identify where you're feeling sensations when emotions are unclear.</div>
                 </div>
-            </a>
+            </div>
 
-            <a href="state-check.html">
-                <div class="card priority-high">
-                    <div class="card-content">
-                        <div class="card-title">🧠 State Check</div>
-                        <div class="card-desc">Flatline? Dissociated? Frozen? Let's figure it out.</div>
-                    </div>
+            <div class="card priority-high" onclick="location.href='state-check.html'">
+                <div class="card-content">
+                    <div class="card-title">🧠 State Check</div>
+                    <div class="card-desc">Determine your current state—flatline, dissociation, freeze, or activation.</div>
                 </div>
-            </a>
+            </div>
 
-            <a href="actions.html">
-                <div class="card priority-medium">
-                    <div class="card-content">
-                        <div class="card-title">⚡ Action Menu</div>
-                        <div class="card-desc">What to do based on your current energy level.</div>
-                    </div>
+            <div class="card priority-medium" onclick="location.href='actions.html'">
+                <div class="card-content">
+                    <div class="card-title">⚡ Action Menu</div>
+                    <div class="card-desc">Categorized responses based on your energy and crisis level.</div>
                 </div>
-            </a>
+            </div>
 
-            <a href="resources.html">
-                <div class="card priority-medium">
-                    <div class="card-content">
-                        <div class="card-title">🫁 Somatic Exercises</div>
-                        <div class="card-desc">SheBreath + other grounding techniques.</div>
-                    </div>
+            <div class="card priority-medium" onclick="location.href='resources.html'">
+                <div class="card-content">
+                    <div class="card-title">🫁 Somatic Exercises</div>
+                    <div class="card-desc">Body-based techniques and guided resources for regulation.</div>
                 </div>
-            </a>
+            </div>
 
-            <a href="log.html">
-                <div class="card priority-low">
-                    <div class="card-content">
-                        <div class="card-title">📝 Trigger Log</div>
-                        <div class="card-desc">Track patterns. What happened today?</div>
-                    </div>
+            <div class="card priority-low" onclick="location.href='log.html'">
+                <div class="card-content">
+                    <div class="card-title">📝 Trigger Log</div>
+                    <div class="card-desc">Track patterns and delayed reactions over time.</div>
                 </div>
-            </a>
+            </div>
 
-            <a href="dont-do.html">
-                <div class="card priority-low">
-                    <div class="card-content">
-                        <div class="card-title">🚫 Don't Do This</div>
-                        <div class="card-desc">Things that make it worse. Do not do these.</div>
-                    </div>
+            <div class="card priority-low" onclick="location.href='dont-do.html'">
+                <div class="card-content">
+                    <div class="card-title">🚫 Avoid These</div>
+                    <div class="card-desc">Actions that destabilize rather than help.</div>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 
