@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don't Do This | Emergency Protocol</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --text: #f0f0f0;
+            --accent: #ff3333;
+            --warning: #ffaa00;
+            --safe: #00ff88;
+            --border: #333;
+            --hover: #1a1a1a;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Courier Prime', monospace;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            border-color: var(--accent);
+            background: var(--hover);
+        }
+
+        .intro {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 4px solid var(--accent);
+            font-weight: bold;
+        }
+
+        .dont-card {
+            background: var(--hover);
+            border: 2px solid var(--accent);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dont-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dont-reason {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .instead {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 3px solid var(--safe);
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .instead-title {
+            font-weight: bold;
+            color: var(--safe);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--warning);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--safe);
+            text-decoration: underline;
+        }
+
+        .warning-box {
+            background: rgba(255, 170, 0, 0.2);
+            border: 2px solid var(--warning);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Dashboard</a>
+        
+        <h1>🚫 Don't Do This</h1>
+        
+        <div class="intro">
+            These are things that FEEL like they should help but actually make it worse. When you're in crisis, your brain will suggest these. Don't fucking do them.
+        </div>
+
+        <div class="warning-box">
+            <strong>IMPORTANT:</strong> These aren't "bad" things in all contexts - they're specifically things that destabilize YOU based on your patterns. Other people might find them helpful. You don't. Trust that.
+        </div>
+
+        <!-- COMMUNICATION DON'TS -->
+        <div class="section-header">Communication & People</div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Call Samaritans</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> You've learned this destabilizes you more. Talking to strangers about feelings when you're in crisis doesn't help you - it makes it worse. You're not broken for this. It's just not your thing.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li>Email Anahi (you can write without talking)</li>
+                    <li>Physical grounding: hot bath, ice, weighted blanket</li>
+                    <li>Movement: walk Maya, run, draw</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Call Your Parents</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> They are the SOURCE of many triggers. Even "innocent" comments (like about bangs) can cause 3-week spirals. They shaved your head. They violated boundaries. They dismiss your food safety concerns. They are NOT your support system.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li>Literally anyone else</li>
+                    <li>Your women's group (30+ group you've built)</li>
+                    <li>Anahi</li>
+                    <li>Maya (she won't trigger you)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Try to Talk About Feelings When Crying</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> You've said explicitly - talking about feelings while crying destabilizes you. It doesn't help. It makes it worse. You don't process verbally when you're that activated.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li>Let yourself cry without narrating it</li>
+                    <li>Physical comfort: blanket, Maya, hot bath</li>
+                    <li>WRITE it down if you need to get it out</li>
+                    <li>Talk about it later (in therapy, or after you've regulated)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Isolate from Your Women's Group</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> You built this group specifically because you'd lost friends to toxic dynamics. These women are safe. Pulling away when you're struggling is old trauma response - "I don't deserve connection" or "I'm too much."
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li>Send one message: "Having a rough time, can we do coffee this week?"</li>
+                    <li>You don't need to explain everything</li>
+                    <li>Just showing up is enough</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COPING DON'TS -->
+        <div class="section-header">Coping Attempts That Backfire</div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Force Yourself to "Be Productive"</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> When you're flatlined (especially 5pm-8pm window), forcing productivity makes you feel worse. It's not laziness - it's a physiological state. Pushing through reinforces shame.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li>Accept the 5pm-8pm flatline as a known pattern</li>
+                    <li>Plan low-demand activities: reading chair, drawing, gentle movement</li>
+                    <li>Productivity can wait until you're regulated</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Make Big Decisions</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> When dissociated, flatlined, or in crisis, your decision-making is impaired. You might quit your job, break up with someone, or make major life changes you'll regret. SI thoughts are especially not decision-making states.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li>Use the 15-minute rule (or 24-hour rule for big stuff)</li>
+                    <li>Wait until you're regulated</li>
+                    <li>Write down the decision urge, revisit later</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't "Think Your Way Out"</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> Dissociation, freeze, flatline - these are BODY states, not thinking problems. Trying to logic your way out keeps you stuck in your head when you need to drop into your body.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li><a href="resources.html">Somatic exercises</a></li>
+                    <li>Movement: walk, run, shake</li>
+                    <li>Sensory input: ice, hot water, texture</li>
+                    <li>The solution is physical, not cognitive</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Skip Eating (Even When Food Feels Like a Chore)</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> You have suspected ARFID and eating already feels like work. When you're in crisis, skipping meals tanks your blood sugar and makes everything worse. Your body needs fuel even when your brain says no.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li>Keep safe foods available: Arlo yogurt, fruit, easy proteins</li>
+                    <li>Eat SOMETHING even if it's "not enough"</li>
+                    <li>Small snacks count</li>
+                    <li>Don't judge what you can manage to eat</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- AVOIDANCE DON'TS -->
+        <div class="section-header">Avoidance That Makes It Worse</div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Avoid Therapy Prep</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> Walking into Tuesday 5pm session unprepared means you spend half the time trying to remember what happened. The bangs comment → 3 week spiral could have been caught earlier if you'd logged it.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li>Use the <a href="log.html">trigger log</a> throughout the week</li>
+                    <li>Before therapy: review your week, write key points</li>
+                    <li>Bring specific examples to Anahi</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Ignore Physical Symptoms</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> Your body tells you what your mind can't. TMJ, IBS, chest tightness, the 4am vibration - these are information. Dismissing them means missing triggers and patterns.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li><a href="body-map.html">Use the body map</a> when symptoms show up</li>
+                    <li>Log physical stuff in your trigger tracker</li>
+                    <li>Track: when did it start? What happened before?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Dismiss the 5pm-8pm Pattern</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> This is a KNOWN window where you flatline. Fighting it or trying to power through doesn't work. It's daily. It's predictable. Use that information.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li>PLAN for it: schedule low-demand activities</li>
+                    <li>Reading chair, drawing, gentle somatic work</li>
+                    <li>Don't schedule important tasks or difficult conversations</li>
+                    <li>Accept it as part of your daily rhythm</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SELF-HARM DON'TS -->
+        <div class="section-header">When SI Thoughts Show Up</div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Act on SI Thoughts</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> SI thoughts are a symptom, not a solution. They show up when you're overwhelmed, not when you actually want to die. There's a difference between the thought and the action.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li><a href="actions.html#red">RED ALERT protocol</a></li>
+                    <li>Email Anahi immediately</li>
+                    <li>15-minute rule: just get through the next 15 minutes</li>
+                    <li>Physical grounding: ice, hot bath, Maya</li>
+                    <li>If actively planning: 999 or A&E</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dont-card">
+            <div class="dont-title">🚫 Don't Keep It Secret</div>
+            <div class="dont-reason">
+                <strong>Why:</strong> SI thoughts thrive in secrecy. Shame makes them worse. You're not protecting anyone by hiding this - you're making yourself more unsafe.
+            </div>
+            <div class="instead">
+                <div class="instead-title">Do this instead:</div>
+                <ul>
+                    <li>Tell Anahi (she needs to know, that's literally her job)</li>
+                    <li>Log it in your tracker (so patterns are visible)</li>
+                    <li>You don't have to tell everyone, but tell SOMEONE safe</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FINAL NOTE -->
+        <div class="warning-box" style="margin-top: 3rem;">
+            <strong>Remember:</strong> The fact that you're reading this means you're trying to take care of yourself. That's not nothing. These "don'ts" aren't about shame - they're about learning what actually works for YOUR nervous system, not what "should" work.
+            <br><br>
+            <a href="actions.html" style="color: var(--bg); text-decoration: underline;">→ Go to what you SHOULD do instead</a>
+        </div>
+    </div>
+</body>
+</html>

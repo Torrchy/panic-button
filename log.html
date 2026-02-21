@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigger Log | Emergency Protocol</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --text: #f0f0f0;
+            --accent: #ff3333;
+            --warning: #ffaa00;
+            --safe: #00ff88;
+            --border: #333;
+            --hover: #1a1a1a;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Courier Prime', monospace;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            border-color: var(--accent);
+            background: var(--hover);
+        }
+
+        .intro {
+            background: var(--hover);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--warning);
+        }
+
+        .log-form {
+            background: var(--hover);
+            padding: 2rem;
+            border: 2px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--warning);
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .submit-btn {
+            background: var(--accent);
+            color: var(--bg);
+            border: 2px solid var(--accent);
+            padding: 1rem 2rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--bg);
+            color: var(--accent);
+        }
+
+        .entries-section {
+            margin-top: 3rem;
+        }
+
+        .section-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--warning);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .clear-btn {
+            background: var(--border);
+            color: var(--text);
+            border: none;
+            padding: 0.5rem 1rem;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .clear-btn:hover {
+            background: var(--accent);
+        }
+
+        .entry {
+            background: var(--hover);
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .entry-date {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            color: var(--safe);
+        }
+
+        .delete-entry {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .entry-field {
+            margin-bottom: 0.8rem;
+        }
+
+        .entry-label {
+            font-weight: bold;
+            color: var(--warning);
+        }
+
+        .no-entries {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.5;
+        }
+
+        a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .helper-text {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Dashboard</a>
+        
+        <h1>📝 Trigger Log</h1>
+        
+        <div class="intro">
+            <strong>Track what happened and when.</strong> Patterns emerge over time - like the bangs comment → 3 week spiral. This helps you and Anahi identify what's actually triggering you, even when it's not obvious in the moment.
+        </div>
+
+        <div class="log-form">
+            <form id="trigger-form">
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="state">What State Were You In?</label>
+                    <select id="state">
+                        <option value="">Select one...</option>
+                        <option value="flatline">Flatline/Depression</option>
+                        <option value="dissociated">Dissociated</option>
+                        <option value="frozen">Frozen/Stuck</option>
+                        <option value="activated">Activated/Anxious</option>
+                        <option value="angry">Angry (even if didn't recognize it)</option>
+                        <option value="si">SI thoughts</option>
+                        <option value="crying">Crying/Overwhelmed</option>
+                        <option value="numb">Numb everywhere</option>
+                        <option value="other">Other/Mixed</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Physical Symptoms (check all that apply)</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="symptoms" value="chest-tight"> Chest tightness
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="symptoms" value="jaw-clenched"> Jaw clenched (TMJ)
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="symptoms" value="shoulders-tense"> Shoulders tense
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="symptoms" value="stomach-issues"> Stomach issues/IBS
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="symptoms" value="vibrating"> 4am vibration
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="symptoms" value="cant-eat"> Can't eat/food aversion
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="symptoms" value="exhausted"> Exhausted/10-12hr sleep
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="symptoms" value="restless"> Restless/need to move
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="what-happened">What Happened? (Who did you talk to? What felt off?)</label>
+                    <textarea id="what-happened" placeholder="Be specific: phone call with dad, saw parents, comment about appearance, work stress, etc."></textarea>
+                    <div class="helper-text">Include: who you interacted with, what was said, what you noticed</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="when-noticed">When Did You Notice the Response?</label>
+                    <select id="when-noticed">
+                        <option value="">Select one...</option>
+                        <option value="immediate">Immediately/Same day</option>
+                        <option value="next-day">Next day</option>
+                        <option value="week-later">About a week later</option>
+                        <option value="weeks-later">2-3 weeks later</option>
+                        <option value="unclear">Not sure when it started</option>
+                    </select>
+                    <div class="helper-text">This helps identify delayed reactions (like the bangs comment)</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="what-helped">What Helped? (If anything)</label>
+                    <textarea id="what-helped" placeholder="Maya walk, drawing, hot bath, therapy session, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" placeholder="Anything else to remember about this..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Save Entry</button>
+            </form>
+        </div>
+
+        <div class="entries-section">
+            <div class="section-header">
+                <span>Previous Entries</span>
+                <button class="clear-btn" onclick="clearAllEntries()">Clear All</button>
+            </div>
+            <div id="entries-container">
+                <div class="no-entries">No entries yet. Add your first one above.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set today's date as default
+        document.getElementById('date').valueAsDate = new Date();
+
+        // Load entries on page load
+        loadEntries();
+
+        document.getElementById('trigger-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const entry = {
+                date: document.getElementById('date').value,
+                state: document.getElementById('state').value,
+                symptoms: Array.from(document.querySelectorAll('input[name="symptoms"]:checked')).map(cb => cb.value),
+                whatHappened: document.getElementById('what-happened').value,
+                whenNoticed: document.getElementById('when-noticed').value,
+                whatHelped: document.getElementById('what-helped').value,
+                notes: document.getElementById('notes').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            saveEntry(entry);
+            
+            // Reset form
+            this.reset();
+            document.getElementById('date').valueAsDate = new Date();
+            
+            // Reload entries
+            loadEntries();
+        });
+
+        function saveEntry(entry) {
+            let entries = JSON.parse(localStorage.getItem('triggerLog') || '[]');
+            entries.unshift(entry); // Add to beginning
+            localStorage.setItem('triggerLog', JSON.stringify(entries));
+        }
+
+        function loadEntries() {
+            const entries = JSON.parse(localStorage.getItem('triggerLog') || '[]');
+            const container = document.getElementById('entries-container');
+            
+            if (entries.length === 0) {
+                container.innerHTML = '<div class="no-entries">No entries yet. Add your first one above.</div>';
+                return;
+            }
+            
+            container.innerHTML = entries.map((entry, index) => {
+                const date = new Date(entry.date);
+                const formattedDate = date.toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
+                
+                return `
+                    <div class="entry">
+                        <div class="entry-header">
+                            <div class="entry-date">${formattedDate}</div>
+                            <button class="delete-entry" onclick="deleteEntry(${index})" title="Delete entry">✕</button>
+                        </div>
+                        ${entry.state ? `<div class="entry-field"><span class="entry-label">State:</span> ${formatState(entry.state)}</div>` : ''}
+                        ${entry.symptoms.length > 0 ? `<div class="entry-field"><span class="entry-label">Symptoms:</span> ${formatSymptoms(entry.symptoms)}</div>` : ''}
+                        ${entry.whatHappened ? `<div class="entry-field"><span class="entry-label">What happened:</span><br>${entry.whatHappened}</div>` : ''}
+                        ${entry.whenNoticed ? `<div class="entry-field"><span class="entry-label">When noticed:</span> ${formatWhenNoticed(entry.whenNoticed)}</div>` : ''}
+                        ${entry.whatHelped ? `<div class="entry-field"><span class="entry-label">What helped:</span><br>${entry.whatHelped}</div>` : ''}
+                        ${entry.notes ? `<div class="entry-field"><span class="entry-label">Notes:</span><br>${entry.notes}</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function deleteEntry(index) {
+            if (confirm('Delete this entry?')) {
+                let entries = JSON.parse(localStorage.getItem('triggerLog') || '[]');
+                entries.splice(index, 1);
+                localStorage.setItem('triggerLog', JSON.stringify(entries));
+                loadEntries();
+            }
+        }
+
+        function clearAllEntries() {
+            if (confirm('Are you sure you want to delete ALL entries? This cannot be undone.')) {
+                localStorage.removeItem('triggerLog');
+                loadEntries();
+            }
+        }
+
+        function formatState(state) {
+            const states = {
+                'flatline': 'Flatline/Depression',
+                'dissociated': 'Dissociated',
+                'frozen': 'Frozen/Stuck',
+                'activated': 'Activated/Anxious',
+                'angry': 'Angry',
+                'si': 'SI thoughts',
+                'crying': 'Crying/Overwhelmed',
+                'numb': 'Numb everywhere',
+                'other': 'Other/Mixed'
+            };
+            return states[state] || state;
+        }
+
+        function formatSymptoms(symptoms) {
+            const symptomsMap = {
+                'chest-tight': 'Chest tightness',
+                'jaw-clenched': 'Jaw clenched',
+                'shoulders-tense': 'Shoulders tense',
+                'stomach-issues': 'Stomach/IBS',
+                'vibrating': '4am vibration',
+                'cant-eat': 'Can\'t eat',
+                'exhausted': 'Exhausted',
+                'restless': 'Restless'
+            };
+            return symptoms.map(s => symptomsMap[s] || s).join(', ');
+        }
+
+        function formatWhenNoticed(when) {
+            const timings = {
+                'immediate': 'Immediately/Same day',
+                'next-day': 'Next day',
+                'week-later': 'About a week later',
+                'weeks-later': '2-3 weeks later',
+                'unclear': 'Not sure when it started'
+            };
+            return timings[when] || when;
+        }
+    </script>
+</body>
+</html>

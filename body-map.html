@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Map | Emergency Protocol</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --text: #f0f0f0;
+            --accent: #ff3333;
+            --warning: #ffaa00;
+            --safe: #00ff88;
+            --border: #333;
+            --hover: #1a1a1a;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Courier Prime', monospace;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            border-color: var(--accent);
+            background: var(--hover);
+        }
+
+        .intro {
+            background: var(--hover);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--warning);
+        }
+
+        .body-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .body-area {
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            background: var(--hover);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .body-area:hover {
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .body-area.active {
+            border-color: var(--accent);
+            background: rgba(255, 51, 51, 0.1);
+        }
+
+        .area-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .area-questions {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .area-questions.show {
+            display: block;
+        }
+
+        .question {
+            margin-bottom: 0.5rem;
+        }
+
+        .sensation-btn {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            margin: 0.2rem;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .sensation-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .sensation-btn.selected {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .interpretation {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 3px solid var(--accent);
+            display: none;
+        }
+
+        .interpretation.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .interpretation h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .interpretation ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Dashboard</a>
+        
+        <h1>🫀 Body Map</h1>
+        
+        <div class="intro">
+            <strong>Click on body areas where you're feeling something.</strong> Then answer what you're feeling there. This helps connect physical sensations to emotional states - especially when you can't name the emotion directly.
+        </div>
+
+        <div class="body-grid">
+            <div class="body-area" onclick="toggleArea('head')">
+                <div class="area-title">
+                    <span class="emoji">🧠</span> Head/Face
+                </div>
+                <div class="area-questions" id="head-questions">
+                    <div class="question">What does it feel like?</div>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'head', 'pressure')">Pressure</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'head', 'fog')">Foggy/Unclear</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'head', 'empty')">Empty</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'head', 'spinning')">Spinning</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'head', 'tight')">Tight/Clenched</button>
+                </div>
+            </div>
+
+            <div class="body-area" onclick="toggleArea('jaw')">
+                <div class="area-title">
+                    <span class="emoji">😬</span> Jaw/TMJ
+                </div>
+                <div class="area-questions" id="jaw-questions">
+                    <div class="question">What does it feel like?</div>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'jaw', 'clenched')">Clenched</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'jaw', 'sore')">Sore</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'jaw', 'locked')">Locked</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'jaw', 'grinding')">Grinding</button>
+                </div>
+            </div>
+
+            <div class="body-area" onclick="toggleArea('chest')">
+                <div class="area-title">
+                    <span class="emoji">❤️</span> Chest
+                </div>
+                <div class="area-questions" id="chest-questions">
+                    <div class="question">What does it feel like?</div>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'chest', 'tight')">Tight/Constricted</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'chest', 'heavy')">Heavy</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'chest', 'vibrating')">Vibrating (4am type)</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'chest', 'empty')">Empty/Hollow</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'chest', 'racing')">Racing heart</button>
+                </div>
+            </div>
+
+            <div class="body-area" onclick="toggleArea('shoulders')">
+                <div class="area-title">
+                    <span class="emoji">💪</span> Shoulders/Neck
+                </div>
+                <div class="area-questions" id="shoulders-questions">
+                    <div class="question">What does it feel like?</div>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'shoulders', 'tight')">Tight/Tense</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'shoulders', 'heavy')">Heavy</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'shoulders', 'burning')">Burning</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'shoulders', 'frozen')">Frozen</button>
+                </div>
+            </div>
+
+            <div class="body-area" onclick="toggleArea('stomach')">
+                <div class="area-title">
+                    <span class="emoji">🫃</span> Stomach/Gut
+                </div>
+                <div class="area-questions" id="stomach-questions">
+                    <div class="question">What does it feel like?</div>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'stomach', 'knots')">Knots/Twisted</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'stomach', 'nausea')">Nauseous</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'stomach', 'empty')">Empty/Void</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'stomach', 'ibs')">IBS flare</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'stomach', 'fluttery')">Fluttery/Anxious</button>
+                </div>
+            </div>
+
+            <div class="body-area" onclick="toggleArea('arms')">
+                <div class="area-title">
+                    <span class="emoji">🦾</span> Arms/Wrists
+                </div>
+                <div class="area-questions" id="arms-questions">
+                    <div class="question">What does it feel like?</div>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'arms', 'tense')">Tense</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'arms', 'restless')">Restless/Need to move</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'arms', 'heavy')">Heavy</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'arms', 'numb')">Numb</button>
+                </div>
+            </div>
+
+            <div class="body-area" onclick="toggleArea('whole')">
+                <div class="area-title">
+                    <span class="emoji">🧍</span> Whole Body
+                </div>
+                <div class="area-questions" id="whole-questions">
+                    <div class="question">What does it feel like?</div>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'whole', 'numb')">Numb everywhere</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'whole', 'floating')">Floating/Disconnected</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'whole', 'heavy')">Heavy/Weighted down</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'whole', 'nothing')">Can't feel anything</button>
+                    <button class="sensation-btn" onclick="selectSensation(event, 'whole', 'restless')">Restless/Activated</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="interpretation" id="interpretation">
+            <h2>What This Might Mean</h2>
+            <div id="interpretation-content"></div>
+        </div>
+    </div>
+
+    <script>
+        let selectedSensations = {};
+
+        function toggleArea(area) {
+            const questions = document.getElementById(area + '-questions');
+            const areaDiv = event.currentTarget;
+            
+            questions.classList.toggle('show');
+            areaDiv.classList.toggle('active');
+        }
+
+        function selectSensation(event, area, sensation) {
+            event.stopPropagation();
+            
+            if (!selectedSensations[area]) {
+                selectedSensations[area] = [];
+            }
+            
+            const btn = event.target;
+            const index = selectedSensations[area].indexOf(sensation);
+            
+            if (index > -1) {
+                selectedSensations[area].splice(index, 1);
+                btn.classList.remove('selected');
+            } else {
+                selectedSensations[area].push(sensation);
+                btn.classList.add('selected');
+            }
+            
+            interpretSensations();
+        }
+
+        function interpretSensations() {
+            const interpretationDiv = document.getElementById('interpretation');
+            const content = document.getElementById('interpretation-content');
+            
+            if (Object.keys(selectedSensations).length === 0) {
+                interpretationDiv.classList.remove('show');
+                return;
+            }
+            
+            let interpretation = '<p><strong>Based on your physical sensations:</strong></p><ul>';
+            let possibleStates = [];
+            
+            // Anger patterns
+            if (selectedSensations.chest?.includes('tight') || 
+                selectedSensations.shoulders?.includes('tight') || 
+                selectedSensations.jaw?.includes('clenched') ||
+                selectedSensations.arms?.includes('tense')) {
+                possibleStates.push('ANGER (even if you don\'t feel angry)');
+                interpretation += '<li><strong>Anger/Rage:</strong> Chest tightness, shoulder tension, clenched jaw, tense arms. You might not consciously feel angry, but your body is holding rage.</li>';
+            }
+            
+            // Dissociation patterns
+            if (selectedSensations.whole?.includes('floating') || 
+                selectedSensations.whole?.includes('numb') || 
+                selectedSensations.whole?.includes('nothing') ||
+                selectedSensations.head?.includes('fog')) {
+                possibleStates.push('DISSOCIATION');
+                interpretation += '<li><strong>Dissociation:</strong> Floating, numbness, fog, disconnection. You\'re here but not here. This is a protective response.</li>';
+            }
+            
+            // Freeze response
+            if (selectedSensations.whole?.includes('heavy') || 
+                selectedSensations.shoulders?.includes('frozen') ||
+                selectedSensations.chest?.includes('heavy')) {
+                possibleStates.push('FREEZE RESPONSE');
+                interpretation += '<li><strong>Freeze Response:</strong> Heavy body, frozen shoulders, weighted down. Your nervous system has hit the brakes.</li>';
+            }
+            
+            // Anxiety patterns
+            if (selectedSensations.stomach?.includes('knots') || 
+                selectedSensations.stomach?.includes('fluttery') || 
+                selectedSensations.chest?.includes('racing') ||
+                selectedSensations.chest?.includes('vibrating')) {
+                possibleStates.push('ANXIETY/PANIC');
+                interpretation += '<li><strong>Anxiety/Panic:</strong> Gut knots, chest vibration (like the 4am wake-ups), racing heart, fluttery stomach. Your alarm system is firing.</li>';
+            }
+            
+            // Flatline/Depression
+            if (selectedSensations.whole?.includes('nothing') || 
+                selectedSensations.chest?.includes('empty') ||
+                selectedSensations.head?.includes('empty')) {
+                possibleStates.push('FLATLINE/DEPRESSION');
+                interpretation += '<li><strong>Flatline/Depression:</strong> Emptiness, void, can\'t feel anything. The 5pm-8pm window type feeling. Nothing is online.</li>';
+            }
+            
+            // Trauma response
+            if (selectedSensations.stomach?.includes('nausea') || 
+                selectedSensations.stomach?.includes('ibs')) {
+                possibleStates.push('TRAUMA RESPONSE');
+                interpretation += '<li><strong>Trauma Response:</strong> Stomach issues, IBS flare, nausea. Your gut is responding to threat/trigger.</li>';
+            }
+            
+            interpretation += '</ul>';
+            
+            // Add recommendations
+            interpretation += '<p><strong>What to do:</strong></p><ul>';
+            
+            if (possibleStates.includes('ANGER (even if you don\'t feel angry)')) {
+                interpretation += '<li>Move your body: Run, walk Maya, physical release</li>';
+                interpretation += '<li>Draw/create something</li>';
+                interpretation += '<li>NOT a good time to talk about feelings</li>';
+            }
+            
+            if (possibleStates.includes('DISSOCIATION') || possibleStates.includes('FLATLINE/DEPRESSION')) {
+                interpretation += '<li>Grounding: <a href="resources.html">Somatic exercises</a></li>';
+                interpretation += '<li>Physical anchoring: Hot bath, weighted blanket, Maya cuddles</li>';
+                interpretation += '<li>Gentle movement: Walk, don\'t force talking</li>';
+            }
+            
+            if (possibleStates.includes('FREEZE RESPONSE')) {
+                interpretation += '<li>Small movements: Just stand up, shake your hands</li>';
+                interpretation += '<li><a href="resources.html">Somatic shaking exercises</a></li>';
+                interpretation += '<li>Don\'t force big actions yet</li>';
+            }
+            
+            if (possibleStates.includes('ANXIETY/PANIC')) {
+                interpretation += '<li><a href="resources.html">Breathing exercises</a> (SheBreath)</li>';
+                interpretation += '<li>Movement to discharge energy: Run, walk</li>';
+                interpretation += '<li>Avoid caffeine if you haven\'t already had it</li>';
+            }
+            
+            interpretation += '</ul>';
+            interpretation += '<p style="margin-top: 1rem;"><a href="actions.html" style="text-decoration: underline;">→ Go to Action Menu for specific next steps</a></p>';
+            
+            content.innerHTML = interpretation;
+            interpretationDiv.classList.add('show');
+        }
+    </script>
+</body>
+</html>
